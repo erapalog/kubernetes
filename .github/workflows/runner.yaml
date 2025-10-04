@@ -1,0 +1,24 @@
+apiVersion: actions.summerwind.dev/v1alpha1
+kind: RunnerDeployment
+metadata:
+  name: demo-runner
+  namespace: arc-runners   # namespace donde instalaste ARC
+spec:
+  replicas: 1
+  template:
+    spec:
+      repository: https://github.com/erapalog/kubernetes   # Reemplaza con tu repositorio
+      # Si quieres usar un runner de organización en lugar de repo individual:
+      # organization: <TU_ORG>
+      # installationID: 123456           # Reemplaza con tu Installation ID
+      labels:
+        - mi-runners                    # Debe coincidir con tu workflow
+      # Opcional: resources para pods
+      resources:
+        limits:
+          cpu: "1"
+          memory: "1Gi"
+        requests:
+          cpu: "500m"
+          memory: "512Mi"
+      # Opcional: tolerations, nodeSelector, etc. según tu cluster
